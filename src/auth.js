@@ -8,17 +8,13 @@ import {
 } from 'firebase/auth';
 
 export async function signUp(email, password) {
-  // a try blockon belüli részben ha hiba van akkor azt a catch blokkban elkaphatjuk
   try {
-    // regisztráljuk a user-t az email, password bemeneti paraméterek segítségével
     const auth = getAuth();
     // https://firebase.google.com/docs/auth/web/password-auth#create_a_password-based_account
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    // ha sikerült a regisztráció akkor a signUp fügvény vissza adja a user-t
     return userCredential.user;
   } catch (error) {
-    // az error változó a catch blokk-ban létezik, a try-ban létrejött hibát tárolja
-    window.alert('error during sign up: ', error.message);
+    window.alert('error during sign up: ' + error.message);
   }
 }
 
@@ -29,7 +25,7 @@ export async function signIn(email, password) {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     return userCredential.user;
   } catch (error) {
-    console.log('error during sign in', error.message);
+    console.log('error during sign in' + error.message);
     window.alert(error.message);
   }
 }
@@ -40,7 +36,7 @@ export async function signOutUser() {
     // https://firebase.google.com/docs/reference/js/auth#next_steps
     await signOut(auth);
   } catch (error) {
-    window.alert('error during signout: ', error.message);
+    window.alert('error during signout: ' + error.message);
   }
 }
 
@@ -69,7 +65,7 @@ export async function resetPassword(email) {
     // https://firebase.google.com/docs/auth/web/manage-users#send_a_password_reset_email
     const auth = getAuth();
     await sendPasswordResetEmail(auth, email);
-    window.alert('Küldünk email-t, benne a további utasításokkal!');
+    window.alert('We have sent an email with further instructions...');
   } catch (e) {
     window.alert('Error during resetpasword email:', e);
   }
