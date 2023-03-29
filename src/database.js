@@ -13,6 +13,7 @@ import {
 import config from './db_config';
 
 console.log('config: ', JSON.stringify(config));
+// https://docs.expo.dev/guides/using-firebase/#using-expo-with-firestore
 initializeApp(config);
 export const db = getFirestore();
 
