@@ -1,14 +1,14 @@
-# Munkaidő nyilvántartó
+# Working Time recorder
 
-## használat
+## usage
 
-Telepítés:
+installation:
 
 ```
 npm install
 ```
 
-Futtatás:
+Running:
 
 ```
 npm run start
