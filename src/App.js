@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
-import LoginPage from './components/LoginPage';
-import InnerPage from './components/InnerPage';
-import './database.js';
+
 import { loginStatus } from './auth';
-import { getUserDataByEmail } from './database';
+import InnerPage from './components/InnerPage';
+import LoginPage from './components/LoginPage';
+import { getUserDataByEmail } from './database.js';
 
 export default function App() {
   const [userData, setUserData] = useState(null);
@@ -16,6 +16,7 @@ export default function App() {
       const userData = await getUserDataByEmail(storedUser.email);
       if (!userData) return;
       setUserData(userData);
+      console.log(userData);
     }
   };
 
@@ -29,7 +30,7 @@ export default function App() {
   }, []);
 
   if (userData === null) {
-    return loading ? null : <LoginPage />;
+    return loading ? null : <LoginPage setUserData={setUserData} />;
   }
-  return loading ? null : <InnerPage userData={userData} />;
+  return loading ? null : <InnerPage userData={userData} setUserData={setUserData} />;
 }

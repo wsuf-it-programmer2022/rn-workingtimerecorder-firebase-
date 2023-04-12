@@ -8,10 +8,11 @@ import {
   TextInput,
   Button,
 } from 'react-native';
-import { signUp, signIn } from '../auth';
-import { createUserData } from '../database';
 
-export default function App() {
+import { signUp, signIn } from '../auth';
+import { createUserData, getUserDataByEmail } from '../database';
+
+export default function LoginPage(props) {
   const [isSignUpActive, setIsSignUpActive] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,7 +23,8 @@ export default function App() {
     console.log('loggin in: ' + email + ' ' + password);
     const user = await signIn(email, password);
     console.log('logged in: ', user.email);
-    // const userDataFromFirebase = await getUserDataByEmail(user.email);
+    const userDataFromFirebase = await getUserDataByEmail(user.email);
+    props.setUserData(userDataFromFirebase);
   };
 
   const register = async () => {
